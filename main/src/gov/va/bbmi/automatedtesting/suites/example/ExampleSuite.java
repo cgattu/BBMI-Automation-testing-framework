@@ -8,7 +8,7 @@ import org.sikuli.script.FindFailed;
 
 public class ExampleSuite extends AutomatedTestingSuite {
 
-	@Test(timeout = 15 * 1000)
+	@Test
 	public void testp1011() throws FindFailed {
 		logger.debug("Launch Firefox driver\n");
 		driver.get("http://158.147.211.128:8080/BBMI/");
@@ -138,7 +138,7 @@ public class ExampleSuite extends AutomatedTestingSuite {
 		//TODO: Logout... then verify the login button appears
 	}
 	
-	@Test(timeout = 15 * 1000)
+	@Test
 	public void testp1211() throws FindFailed {
 		logger.debug("Return to MyHealtheVet homepage\n");
 		driver.get("http://158.147.211.128:8080/BBMI/");

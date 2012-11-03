@@ -31,13 +31,7 @@ public final class ResultsLogWatchMan extends TestWatchman {
             throw new IllegalStateException("Already instantiated");
         }
 		
-		//FileHandler fileHandler = new FileHandler(new SimpleDateFormat("yyyy-MM-dd--HH-mm-ss").format(new Date())+"-TestSimple.txt");
-	    
-		//fileHandler.setFormatter(new SimpleFormatter());
-		//resultsLogger.addHandler(fileHandler);
-		
 		String fileName = "TestResults-" +new SimpleDateFormat("yyyy-MM-dd--HH-mm-ss").format(new Date())+".txt";
-		
 		LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
 	    FileAppender fileAppender = new FileAppender();
 	    fileAppender.setContext(loggerContext);

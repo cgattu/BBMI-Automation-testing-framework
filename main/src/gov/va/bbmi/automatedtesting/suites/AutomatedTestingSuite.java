@@ -71,6 +71,9 @@ public abstract class AutomatedTestingSuite {
 	
 	@BeforeClass
 	public static void setupDriver() {
+		
+		//TODO: see if we can get selenium to record all of its events (ie: click, wait, etc) by default
+		
 		//Setup selenium logger
 //		LoggingPreferences logs = new LoggingPreferences();
 //		logs.enable(LogType.DRIVER, Level.ALL);
@@ -103,6 +106,7 @@ public abstract class AutomatedTestingSuite {
 	
 	//utility methods
 	
+	//TODO: shouldn't be loading properties in each time. Should make a properties singleton
 	public Properties getProperties() {
 		Properties prop = new Properties();
 		InputStream in = getClass().getResourceAsStream("suite.properties");
