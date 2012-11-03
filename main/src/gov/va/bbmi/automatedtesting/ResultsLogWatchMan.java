@@ -58,7 +58,7 @@ public final class ResultsLogWatchMan extends TestWatchman {
 	    resultsLogger.addAppender(fileAppender);
 
 	    // OPTIONAL: print logback internal status messages
-	    StatusPrinter.print(loggerContext); //TODO: maybe turn off?
+	    //StatusPrinter.print(loggerContext); //TODO: maybe turn off?
 	}
 	
 	@Override

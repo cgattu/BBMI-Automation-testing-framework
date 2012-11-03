@@ -9,7 +9,9 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -25,45 +27,18 @@ public abstract class AutomatedTestingSuite {
 
 	//should all be thread safe since there won't be multiple threads touching the same TestSuite class
 	protected Logger logger; //logger called by the tests manually
-	protected WebDriver driver;  //TODO: do we want a new instance of this each time, or should this be singleton?
-	protected Screen s;
-	protected Robot r;
+	protected static WebDriver driver; //TODO: do we want a new instance of this each time, or should this be singleton?
+	protected static Screen s;
+	protected static Robot r;
 	
 	@Rule
 	public ResultsLogWatchMan resultLogWatchMan = ResultsLogWatchMan.getInstance();
 	
 	public AutomatedTestingSuite() {
 		
-		//Setup selenium logger
-//		LoggingPreferences logs = new LoggingPreferences();
-//		logs.enable(LogType.DRIVER, Level.ALL);
-//		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-//		capabilities.setCapability(CapabilityType.LOGGING_PREFS, logs);
-//		driver = new FirefoxDriver(capabilities);
-		
-		DesiredCapabilities caps = DesiredCapabilities.firefox(); 
-		LoggingPreferences logs = new LoggingPreferences(); 
-		logs.enable(LogType.DRIVER, Level.FINEST); 
-		caps.setCapability(CapabilityType.LOGGING_PREFS, logs); 
-		driver = new FirefoxDriver(caps);
-		
-		//driver = new FirefoxDriver();
-		s = null; //new Screen();
-		// Create a file handler that write log record to a file called my.log
-
-
-		
 		// Add to the desired logger
 		logger = LoggerFactory.getLogger("bbmi.testing.transcript");
 		
-		try {
-			r = new Robot();
-		} catch (AWTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-
 //		FileOutputStream outfos = null;
 //		try {
 //			outfos = new FileOutputStream("C:/selenium/SeleniumLog/testOutput.html");
@@ -94,30 +69,43 @@ public abstract class AutomatedTestingSuite {
 //
 //	}
 	
-	@AfterClass
-	public static void writeResultsToFile() {
+	@BeforeClass
+	public static void setupDriver() {
+		//Setup selenium logger
+//		LoggingPreferences logs = new LoggingPreferences();
+//		logs.enable(LogType.DRIVER, Level.ALL);
+//		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+//		capabilities.setCapability(CapabilityType.LOGGING_PREFS, logs);
+//		driver = new FirefoxDriver(capabilities);
+		
+		DesiredCapabilities caps = DesiredCapabilities.firefox(); 
+		LoggingPreferences logs = new LoggingPreferences(); 
+		logs.enable(LogType.DRIVER, Level.ALL); 
+		caps.setCapability(CapabilityType.LOGGING_PREFS, logs); 
+		driver = new FirefoxDriver(caps);
+		
+		//driver = new FirefoxDriver();
+		
+		s = null; //new Screen();
+		try {
+			r = new Robot();
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
-	
+	@AfterClass
+	public static void closeDriver() {
+		driver.close();
+	}
 	
 	//utility methods
 	
-	/**
-	 * Get the method name for a depth in call stack. <br />
-	 * Utility function
-	 * @param depth depth in the call stack (0 means current method, 1 means call method, ...)
-	 * @return method name
-	 */
-	public static String getMethodName(final int depth)
-	{
-	  final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
-	  return ste[ste.length - 1 - depth].getMethodName();
-	}
-	
 	public Properties getProperties() {
 		Properties prop = new Properties();
-		InputStream in = getClass().getResourceAsStream("foo.properties");
+		InputStream in = getClass().getResourceAsStream("suite.properties");
 		try {
 			prop.load(in);
 			in.close();
@@ -129,8 +117,4 @@ public abstract class AutomatedTestingSuite {
 		return prop;
 	}
 	
-//	public abstract void preTestSuiteRun();
-//	public abstract void postTestSuiteRun();
-	
-	public abstract String getTestSuiteName();
 }

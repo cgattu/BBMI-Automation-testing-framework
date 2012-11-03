@@ -1,6 +1,7 @@
-package gov.va.bbmi.automatedtesting;
+package gov.va.bbmi.automatedtesting.suites.simple;
 
 import static org.junit.Assert.assertTrue;
+import gov.va.bbmi.automatedtesting.ResultsLogWatchMan;
 
 import org.junit.Rule;
 import org.junit.Test;
