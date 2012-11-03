@@ -57,7 +57,7 @@ public abstract class AutomatedTestingSuite {
 	 * and checks to make sure the server is running.
 	 */
 //	@BeforeClass
-//	public static void checkServer() {
+//	public static void checkServer() { //TODO: re-add the server check?
 //		
 //		WebDriver checkServerDriver = new FirefoxDriver();
 //
@@ -89,7 +89,7 @@ public abstract class AutomatedTestingSuite {
 		
 		//driver = new FirefoxDriver();
 		
-		s = null; //new Screen();
+		s = new Screen();
 		try {
 			r = new Robot();
 		} catch (AWTException e) {
