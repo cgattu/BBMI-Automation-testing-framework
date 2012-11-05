@@ -11,7 +11,7 @@ import org.sikuli.script.Screen;
 
 public class Testcase1  extends AutomatedTestingSuite {
 
-	//THIS IS A TEST
+	//THIS IS A TEST THIS IS TEST
 	
 	//@Test(timeout= 15 * 1000) //can add an optional timeout, this is 15 seconds
 	@Test
