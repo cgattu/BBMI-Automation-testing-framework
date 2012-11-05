@@ -11,6 +11,8 @@ import org.sikuli.script.Screen;
 
 public class Testcase1  extends AutomatedTestingSuite {
 
+	//THIS IS A TEST
+	
 	//@Test(timeout= 15 * 1000) //can add an optional timeout, this is 15 seconds
 	@Test
 	public void testForNotePadOpening() throws FindFailed {
