@@ -11,12 +11,13 @@ import org.sikuli.script.Screen;
 
 public class Testcase1  extends AutomatedTestingSuite {
 
-	//THIS IS A TEST THIS IS TEST
-	
 	//@Test(timeout= 15 * 1000) //can add an optional timeout, this is 15 seconds
+	
 	@Test
 	public void testForNotePadOpening() throws FindFailed {
 
+		
+		
 		/*driver.get(getProperties().getProperty("URL"));
 		driver.findElement(By.name("loginId")).clear();
 		driver.findElement(By.name("loginId")).sendKeys(getProperties().getProperty("userID"));
@@ -50,12 +51,13 @@ public class Testcase1  extends AutomatedTestingSuite {
 		r.delay(10000);
 			
 		Screen s = new Screen(); 
+//		C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/resources/sikuli/images/E.png
 //		C:/BBMI Automated Testing/main/src/Img1
-		s.click("C:/BBMI Automated Testing/main/src/Img1/OK.png"); //TODO: will need to refer to this on the class path and not the actual path
+		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/resources/sikuli/images/OK.png"); //TODO: will need to refer to this on the class path and not the actual path
 		r.delay(10000);
-		s.wait("C:/BBMI Automated Testing/main/src/Img1/E.png");
+		s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/resources/sikuli/images/E.png");
 		r.delay(10000);
-		s.click("C:/BBMI Automated Testing/main/src/Img1/E.png");
+		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/resources/sikuli/images/E.png");
 //	    r.delay(5000);
         /*driver.findElement(By.linkText("Procedure/Test Name")).click();
    		driver.findElement(By.linkText("PDF")).click();

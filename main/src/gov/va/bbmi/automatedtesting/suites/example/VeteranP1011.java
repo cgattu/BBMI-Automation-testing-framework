@@ -1,7 +1,9 @@
 package gov.va.bbmi.automatedtesting.suites.example;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 import gov.va.bbmi.automatedtesting.suites.AutomatedTestingSuite;
 
 import org.junit.Test;
@@ -19,7 +21,7 @@ public class VeteranP1011 extends AutomatedTestingSuite {
 
 	
 	@Test
-	public void testForFileOpening() throws FindFailed {
+	public void testForFileOpening() throws Exception {
 
 		
 		logger.info(":: In Start of testForNotePadOpening() method");
@@ -37,6 +39,19 @@ public class VeteranP1011 extends AutomatedTestingSuite {
 		r.delay(5000);
 		driver.findElement(By.cssSelector("strong > a")).click();
 		r.delay(5000);
+		logger.info("::validating the messages ::If you have an upgraded My HealtheVet Premium account you may also download your VA Continuity of Care Document (VA CCD).Start::");
+		assertEquals("If you have an upgraded My HealtheVet Premium account you may also download your VA Continuity of Care Document (VA CCD). This is a standard electronic exchange document. It is used for sharing patient information. This is a summary and not intended to be a copy of your complete VA health record. To learn more about this feature, visit VA CCD.", driver.findElement(By.xpath("//div[@id='main']/section/div/div/p[7]")).getText());
+		logger.info("::validating the messages ::If you have an upgraded My HealtheVet Premium account you may also download your VA Continuity of Care Document (VA CCD).End::");
+		logger.info("::validating the messages ::Download my customized Blue Button data.Start::");
+	    assertEquals("Download my customized Blue Button data", driver.findElement(By.cssSelector("label")).getText());
+	    logger.info("::validating the messages ::Download my customized Blue Button data.End::");
+	    logger.info("::validating the messages ::Download my VA Continuity of Care Document (VA CCD) data*.Start::");
+	    assertEquals("Download my VA Continuity of Care Document (VA CCD) data*", driver.findElement(By.xpath("//div[@id='mhv-conditional-box']/div/div[2]/label")).getText());
+	    logger.info("::validating the messages ::Download my VA Continuity of Care Document (VA CCD) data*.End::");
+	    logger.info("::validating the messages ::Protect your information and your identity. Send your information to a safe site or device that you or someone you trust controls.*.Start::");
+	    assertEquals("Protect your information and your identity. Send your information to a safe site or device that you or someone you trust controls. Remember, once you have downloaded your information from My HealtheVet, it is your responsibility to keep it safe and private. Learn more about protecting your personal health information .", driver.findElement(By.cssSelector("span.introText")).getText());
+	    logger.info("::validating the messages ::Protect your information and your identity. Send your information to a safe site or device that you or someone you trust controls.*.End::");
+	    logger.info("::validating the messages End::");
 		driver.findElement(By.linkText("Continue")).click();
 		logger.info("::The Continue button was clicked::");
 		r.delay(5000);

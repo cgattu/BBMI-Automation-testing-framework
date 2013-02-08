@@ -65,7 +65,7 @@ public final class ResultsLogWatchMan extends TestWatchman {
 	public void failed(Throwable t, FrameworkMethod method) {
 		setupMDC(method);
 		resultsLogger.info("Fail");
-		// resultsLogger.log(Level.INFO, method.getName() + " -- Fail", t);
+//		 resultsLogger.info( method.getName() + " -- Fail", t);
 		// //log with stacktrace
 	}
 

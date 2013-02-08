@@ -142,17 +142,6 @@ public class Testcase3 extends AutomatedTestingSuite {
         r.delay(5000);
         logger.info("Verify  Sorting  on Procedure/Test End");
         r.delay(5000);
-      //To Check Sort on Images
-		logger.info("Verify  Sorting  on images");
-        driver.findElement(By.linkText("# Images")).click();
-        r.delay(5000);
-        logger.info("Verify  Sorting  on images End");
-      //To Check Sort on PDF File Size
-		logger.info("Verify  Sorting  on PDF File Size");
-		 r.delay(5000);
-		 logger.info("Verify  Sorting  on PDF File Size End");
-		 driver.findElement(By.linkText("Est PDF Size")).click();
-		 r.delay(5000);
         logger.info("Stated Click on PDF");
    		driver.findElement(By.linkText("PDF")).click();
    		
@@ -175,7 +164,7 @@ public class Testcase3 extends AutomatedTestingSuite {
 		driver.findElement(By.id("textHead")).click();
 		r.delay(5000);
 		logger.info("Selecting the Provider");
-		new Select(driver.findElement(By.id("provider"))).selectByVisibleText(getProperties().getProperty("provider"));
+		new Select(driver.findElement(By.id("provider"))).selectByVisibleText("Provider, One");
 		r.delay(5000);
 		logger.info("Click on the ack box");
 		driver.findElement(By.id("verify")).click();
@@ -183,21 +172,7 @@ public class Testcase3 extends AutomatedTestingSuite {
 		logger.info("Click on the SendMyReport button");
 		driver.findElement(By.cssSelector("input.bbmi_button")).click();
 		r.delay(5000); 
-		//Backk to the reports list.
-		logger.info("Back to the Reports List Start");
-		driver.findElement(By.linkText("Return to Reports List")).click();
-		logger.info("Back to the Reports List End");
-		r.delay(5000);
-		logger.info("Click on the  Preview link");
-		driver.findElement(By.xpath("//div[@id='main']/section/div/section/table/tbody/tr[8]/td[4]/a/span")).click();
-		r.delay(7000);
-		//Click on the Image.
-		logger.info("Click on the scanned images");
-		driver.findElement(By.xpath("(//img[@alt='Radiology image thumbnail'])[6]")).click();
-		r.delay(5000);
-		logger.info("Click on the  close image to close the  scanned image");
-		driver.findElement(By.cssSelector("span.ui-icon.ui-icon-closethick")).click();
-		r.delay(5000);
+		
 		logger.info("Verify Member Logout is present or not");
 		assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*Member Logout[\\s\\S]*$"));
 		logger.info("Click on the Logout button");
