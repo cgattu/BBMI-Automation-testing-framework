@@ -5,6 +5,7 @@ import gov.va.bbmi.automatedtesting.ResultsLogWatchMan;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,6 +24,7 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
@@ -61,6 +63,12 @@ public abstract class AutomatedTestingSuite {
 		// Add to the desired logger
 		logger = LoggerFactory.getLogger("bbmi.testing.results");
 		
+		boolean fireFoxDriverSelected = Boolean.parseBoolean(getProperties().getProperty("FireFoxDriver"));
+		if (fireFoxDriverSelected)
+			setupFirefoxDriver();
+		else
+			setupIEDriver();
+		
 //		FileOutputStream outfos = null;
 //		try {
 //			outfos = new FileOutputStream("C:/selenium/SeleniumLog/testOutput.html");
@@ -91,8 +99,8 @@ public abstract class AutomatedTestingSuite {
 //
 //	}
 	
-	@BeforeClass
-	public static void setupDriver() {
+	
+	public static void setupFirefoxDriver() {
 		
 		//TODO: see if we can get selenium to record all of its events (ie: click, wait, etc) by default
 		
@@ -123,10 +131,10 @@ public abstract class AutomatedTestingSuite {
 	
 	@AfterClass
 	public static void closeDriver() {
-		driver.close();
+		driver.quit();
 	}
 	
-	/*@BeforeClass
+	
 	public static void setupIEDriver() {
 		
 		//TODO: see if we can get selenium to record all of its events (ie: click, wait, etc) by default
@@ -137,7 +145,7 @@ public abstract class AutomatedTestingSuite {
 		LoggingPreferences logs = new LoggingPreferences(); 
 		logs.enable(LogType.DRIVER, Level.ALL); 
 		DesiredCapabilities caps = DesiredCapabilities.internetExplorer(); 
-		caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+		caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, false);
 		
 		caps.setCapability(CapabilityType.LOGGING_PREFS, logs); 
 		
@@ -153,9 +161,17 @@ public abstract class AutomatedTestingSuite {
 			e.printStackTrace();
 		}
 	}
-	*/
-	//utility methods
 	
+	//utility methods
+	public  static void refreshDriver() {		
+		try {
+			driver.navigate().refresh();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	//TODO: shouldn't be loading properties in each time. Should make a properties singleton
 	public Properties getProperties() {
 		Properties prop = new Properties();

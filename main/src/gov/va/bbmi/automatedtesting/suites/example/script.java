@@ -1,18 +1,20 @@
 package gov.va.bbmi.automatedtesting.suites.example;
 
+import java.util.regex.Pattern;
+import java.util.concurrent.TimeUnit;
+import org.junit.*;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
 public class script {
-	package com.example.tests;
+	
 
-	import java.util.regex.Pattern;
-	import java.util.concurrent.TimeUnit;
-	import org.junit.*;
-	import static org.junit.Assert.*;
-	import static org.hamcrest.CoreMatchers.*;
-	import org.openqa.selenium.*;
-	import org.openqa.selenium.firefox.FirefoxDriver;
-	import org.openqa.selenium.support.ui.Select;
+	
 
-	public class Untitled {
+	
 		private WebDriver driver;
 		private String baseUrl;
 		private StringBuffer verificationErrors = new StringBuffer();
@@ -55,4 +57,4 @@ public class script {
 		}
 	}
 
-}
+

@@ -6,14 +6,24 @@ import gov.va.bbmi.automatedtesting.RequestMethod;
 import gov.va.bbmi.automatedtesting.URLStatusChecker;
 import gov.va.bbmi.automatedtesting.suites.AutomatedTestingSuite;
 
+import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Select;
 import org.sikuli.script.FindFailed;
+import org.sikuli.script.Screen;
 
 import gov.va.bbmi.automatedtesting.*;
 public class IETestcase extends AutomatedTestingSuite {
@@ -112,8 +122,10 @@ public class IETestcase extends AutomatedTestingSuite {
 		driver.findElement(By.name("loginId")).sendKeys(getProperties().getProperty("userID"));
 		logger.info("::The UserID ::"+getProperties().getProperty("userID"));
 		r.delay(5000);
+		driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
 		driver.findElement(By.cssSelector("input.mhv_button")).click();
 		logger.info("::The login button was clicked::");
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		r.delay(5000);
 		driver.findElement(By.cssSelector("strong > a")).click();
 		r.delay(5000);
@@ -145,6 +157,26 @@ public class IETestcase extends AutomatedTestingSuite {
 		driver.findElement(By.cssSelector("input.bbmi_button")).click();
 		logger.info(":: The Submit Was Clicked");
 		r.delay(5000);
+		/*logger.info("Viewing the Report Text Preview");
+		driver.findElement(By.id("textHead")).click();
+		r.delay(7000);*/
+		driver.findElement(By.xpath("//div[@id='main']/section/div/section/table/tbody/tr[2]/td[4]/a/span")).click();
+		r.delay(5000);
+		logger.info("Viewing the Report Text Preview");
+	    driver.findElement(By.id("textHead")).click();
+	    r.delay(5000);
+	    logger.info("Closing the Report Text Preview");
+	    driver.findElement(By.id("textHead")).click();
+	    r.delay(5000);
+	    driver.findElement(By.cssSelector("img[alt=\"Radiology image thumbnail\"]")).click();
+	    r.delay(5000);
+	    driver.findElement(By.cssSelector("span.ui-icon.ui-icon-closethick")).click();
+	    r.delay(5000);
+	    driver.findElement(By.linkText("Return to List")).click();
+		/*logger.info("Selecting the Provider");
+		new Select(driver.findElement(By.id("provider"))).selectByValue(getProperties().getProperty("provider"));*/
+		r.delay(5000);
+		//
 		//for()
 		//driver.findElement(By.linkText("Text")).click();	
 		final WebElement element = driver.findElement(By.linkText("Text"));
@@ -186,7 +218,8 @@ public class IETestcase extends AutomatedTestingSuite {
 			               element.click();
 			                 return null;
 			           }
-			        },5);			        
+			        },5);
+			r.delay(5000);
 			logger.info("clicked!");
 			
 			r.keyPress(KeyEvent.VK_ALT);
@@ -194,7 +227,7 @@ public class IETestcase extends AutomatedTestingSuite {
 	        r.keyRelease(KeyEvent.VK_ALT);
 	        r.keyRelease(KeyEvent.VK_N);
 	        logger.info("Notification Bar Selected...");
-
+	        r.delay(5000);
 	        //Select Save button
 	        r.keyPress(KeyEvent.VK_O);
 	        r.keyRelease(KeyEvent.VK_O);
@@ -237,7 +270,9 @@ public class IETestcase extends AutomatedTestingSuite {
             System.out.println(e.getLocalizedMessage());
         }*/
 
- 		
+ 		//refresh driver
+		AutomatedTestingSuite.refreshDriver();
+		
 		//To Check Sort on Date/Time
 		logger.info("Verify  Sorting  on Date/Time Start");
 		driver.findElement(By.linkText("Date/Time Exam Performed")).click();
@@ -262,26 +297,79 @@ public class IETestcase extends AutomatedTestingSuite {
 		 driver.findElement(By.linkText("Est PDF Size")).click();
 		 r.delay(5000);
         logger.info("Stated Click on PDF");
-   		driver.findElement(By.linkText("PDF")).click();
-   		
+        final WebElement elementPDF = driver.findElement(By.linkText("PDF")); //.click();   		
    		r.delay(5000);
-//   		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/OK.png"); //TODO: will need to refer to this on the class path and not the actual path
+   		try{
+   			
+   				IEExecutor ieExecutor2 = new IEExecutor();
+   				ieExecutor2.executeMethodWithTimeout(new Callable<Void>(){
+   				           public Void call() {
+   				               System.out.println("Starting click thread...");
+   				            elementPDF.click();
+   				                 return null;
+   				           }
+   				        },5);
+   				r.delay(7000);
+   				logger.info("clicked!");
+   				
+   				r.keyPress(KeyEvent.VK_ALT);
+   		        r.keyPress(KeyEvent.VK_N);
+   		        r.keyRelease(KeyEvent.VK_ALT);
+   		        r.keyRelease(KeyEvent.VK_N);
+   		        logger.info("Notification Bar Selected...");
+   		        
+   		        r.delay(5000);
+   		        
+   		        //Select Save button
+   		        r.keyPress(KeyEvent.VK_O);
+   		        r.keyRelease(KeyEvent.VK_O);
+   		        logger.info("File open...");
+
+   		        r.delay(7000);
+   		        
+   		      //close notepad..
+   		        r.keyPress(KeyEvent.VK_ALT);
+   		        r.keyPress(KeyEvent.VK_F4);
+   		        r.keyRelease(KeyEvent.VK_ALT);
+   		        r.keyRelease(KeyEvent.VK_F4);
+   		        logger.info("closed pdf...");
+   		        
+   		        r.delay(5000);
+   		        
+   		        //Close notification Bar
+   		        r.keyPress(KeyEvent.VK_ESCAPE);
+   		        r.keyRelease(KeyEvent.VK_ESCAPE);
+   		        logger.info("Notification Bar Closed...");
+   		        
+   		        r.delay(5000);
+   				
+   		        
+   				//logger.info("::Sikuli Click on OK Image::");
+   			}catch(Exception e){
+   				System.out.println("in the exception");
+   				e.printStackTrace();
+   			}
+/*//   		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/OK.png"); //TODO: will need to refer to this on the class path and not the actual path
 		logger.info("::Sikuli Click on OK Image::");
 		r.delay(10000);
 //		s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
 		logger.info(":; Sikuli  Wait for Close image loaded::");
 		r.delay(10000);
 //		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
-		logger.info("::Sikuli Click on CLOSE Image::");
-		r.delay(10000);
-		logger.info("Click on the SendReport Image");
+		logger.info("::Sikuli Click on CLOSE Image::");*/
+		//r.delay(10000);
+   			
+   		//refresh driver
+   		AutomatedTestingSuite.refreshDriver();	
+		
+   		logger.info("Click on the SendReport Image");
    		driver.findElement(By.cssSelector("img")).click();
    		r.delay(5000);
    		
    		//driver.findElement(By.id("textHead")).click();
-   		logger.info("Viewing the Report Text Preview");
+   		/*logger.info("Viewing the Report Text Preview");
 		driver.findElement(By.id("textHead")).click();
-		r.delay(5000);
+		r.delay(5000);*/
 		logger.info("Selecting the Provider");
 		new Select(driver.findElement(By.id("provider"))).selectByValue(getProperties().getProperty("provider"));
 		r.delay(5000);
@@ -322,4 +410,6 @@ public class IETestcase extends AutomatedTestingSuite {
 		//driver.close(); //this is now handled in @AfterTest
         logger.info(":: End of testForFileOpening::");
 	}
+	
+	
 }
