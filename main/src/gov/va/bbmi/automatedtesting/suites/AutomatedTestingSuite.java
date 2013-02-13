@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AutomatedTestingSuite {
 
 	//should all be thread safe since there won't be multiple threads touching the same TestSuite class
-	protected Logger logger; //logger called by the tests manually
+	protected static Logger logger; //logger called by the tests manually
 	protected static WebDriver driver; //TODO: do we want a new instance of this each time, or should this be singleton?
 	protected static Screen s;
 	protected static Robot r;
@@ -168,7 +168,7 @@ public abstract class AutomatedTestingSuite {
 			driver.navigate().refresh();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info(e.getLocalizedMessage());
 		}
 	}
 

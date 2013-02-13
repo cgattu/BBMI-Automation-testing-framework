@@ -28,85 +28,7 @@ import org.sikuli.script.Screen;
 import gov.va.bbmi.automatedtesting.*;
 public class IETestcase extends AutomatedTestingSuite {
 	
-/*	
 
-	@Test
-	public void testForThreeMonths() throws Exception {
-		logger.info("::In start of testForThreeMonths() methdod::");
-		logger.info("**********Start open application************");
-		driver.get(getProperties().getProperty("URL"));
-		logger.info("::getting the URL from the properties file :: The URL is ::"+getProperties().getProperty("URL"));
-		r.delay(5000);
-		driver.manage().window().maximize();
-		driver.findElement(By.name("loginId")).clear();
-		driver.findElement(By.name("loginId")).sendKeys(getProperties().getProperty("userID"));
-		logger.info("::The UserID ::"+getProperties().getProperty("userID"));
-		r.delay(5000);
-		driver.findElement(By.cssSelector("input.mhv_button")).click();
-		logger.info("::The login button was clicked::");
-		r.delay(5000);
-		driver.findElement(By.cssSelector("strong > a")).click();
-		r.delay(5000);
-		driver.findElement(By.linkText("Continue")).click();
-		logger.info("::The Continue button was clicked::");
-		r.delay(5000);
-		driver.findElement(By.id("date_3_mo")).click();
-		logger.info("::Selected the 3 months data range::");
-		r.delay(5000);
-		driver.findElement(By.cssSelector("input.bbmi_button")).click();
-		logger.info("::The Submit button was clicked to view the 3 months data::");
-		r.delay(5000);
-		logger.info("::Check for the Found 0 reports Text for three months on browser started::");
-		assertFalse(!driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*Found 0 reports for the timeframe[\\s\\S]*$"));
-		logger.info("::Check for the Found 0 reports Text on browser end::");
-		driver.findElement(By.linkText("Cancel")).click();
-		logger.info(":: The Cancel button was clicked::");
-		driver.findElement(By.linkText("Continue")).click();
-		logger.info("::The Continue button was clicked::");
-		logger.info("::In End of testForThreeMonths() methdod::");
-	}
-	
-	@Test
-	public void testForSixMonths() {
-		logger.info("::In Start of testForSixMonths() methdod::");
-		r.delay(5000);
-		driver.findElement(By.id("date_6_mo")).click();
-		logger.info("::Selected the 6 months data range::");
-		r.delay(5000);
-		driver.findElement(By.cssSelector("input.bbmi_button")).click();
-		logger.info(":: The Submit button was clicked::");
-		r.delay(5000);
-		logger.info("::Check for the Found 0 reports Text for six months on browser started::");
-		assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*Found 0 reports for the timeframe:[\\s\\S]*$"));
-		logger.info("::Check for the Found 0 reports Text for six months on browser End::");
-		driver.findElement(By.linkText("Cancel")).click();
-		logger.info(":: The Cancel button was clicked::");
-		driver.findElement(By.linkText("Continue")).click();
-		r.delay(5000);
-		logger.info("::The Continue button was clicked::");
-		logger.info("::In End of testForSixMonths() methdod::");
-	}
-	@Test
-	public void testForOneYear() {
-		logger.info("::In Start of testForOneYear() methdod::");
-		r.delay(5000);
-		driver.findElement(By.id("date_12_mo")).click();
-		logger.info("::Selected the OneYear data range::");
-		r.delay(5000);
-		driver.findElement(By.cssSelector("input.bbmi_button")).click();
-		logger.info(":: The Submit button was clicked::");
-		r.delay(5000);
-		logger.info("::Check for the Found 0 reports Text for OneYear on browser started::");
-		assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*Found 0 reports for the timeframe:[\\s\\S]*$"));
-		logger.info("::Check for the Found 0 reports Text for OneYear on browser End::");
-		driver.findElement(By.linkText("Cancel")).click();
-		logger.info(":: The Cancel button was clicked::");
-		driver.findElement(By.linkText("Continue")).click();
-		logger.info("::The Continue button was clicked::");
-		logger.info("::In End of testForOneYear() methdod::");
-		r.delay(5000);
-	}*/
-	
 	@Test
 	public void testForFileOpening() throws FindFailed {
 
@@ -157,10 +79,26 @@ public class IETestcase extends AutomatedTestingSuite {
 		driver.findElement(By.cssSelector("input.bbmi_button")).click();
 		logger.info(":: The Submit Was Clicked");
 		r.delay(5000);
+		logger.info("Click on the  Preview link");
+		driver.findElement(By.xpath("//div[@id='main']/section/div/section/table/tbody/tr[2]/td[4]/a/span")).click();
+		r.delay(7000);
+		//Click on the Image.
+		logger.info("Click on the scanned images");
+		driver.findElement(By.xpath("(//img[@alt='Radiology image thumbnail'])[6]")).click();
+		r.delay(5000);
+		logger.info("Click on the  close image to close the  scanned image");
+		driver.findElement(By.cssSelector("span.ui-icon.ui-icon-closethick")).click();
+		r.delay(5000);
+		//Back to the reports list.
+		logger.info("Back to the Reports List Start");
+		driver.findElement(By.linkText("Return to List")).click();
+		logger.info("Back to the Reports List End");
+		r.delay(5000);
+		
 		/*logger.info("Viewing the Report Text Preview");
 		driver.findElement(By.id("textHead")).click();
 		r.delay(7000);*/
-		driver.findElement(By.xpath("//div[@id='main']/section/div/section/table/tbody/tr[2]/td[4]/a/span")).click();
+		/*driver.findElement(By.xpath("//div[@id='main']/section/div/section/table/tbody/tr[2]/td[4]/a/span")).click();
 		r.delay(5000);
 		logger.info("Viewing the Report Text Preview");
 	    driver.findElement(By.id("textHead")).click();
@@ -172,14 +110,14 @@ public class IETestcase extends AutomatedTestingSuite {
 	    r.delay(5000);
 	    driver.findElement(By.cssSelector("span.ui-icon.ui-icon-closethick")).click();
 	    r.delay(5000);
-	    driver.findElement(By.linkText("Return to List")).click();
+	    driver.findElement(By.linkText("Return to List")).click();*/
 		/*logger.info("Selecting the Provider");
 		new Select(driver.findElement(By.id("provider"))).selectByValue(getProperties().getProperty("provider"));*/
 		r.delay(5000);
 		//
 		//for()
 		//driver.findElement(By.linkText("Text")).click();	
-		final WebElement element = driver.findElement(By.linkText("Text"));
+		final WebElement element = driver.findElement(By.xpath("(//a[contains(text(),'Text')])[2]"));//(By.linkText("Text"));
 		logger.info(":: Click on the Text to open the NotePad::");
 		//Testing the HTTP Status Codes for downloading.
 		//if status codes other than 302 or 202 , then it fails.
@@ -273,31 +211,8 @@ public class IETestcase extends AutomatedTestingSuite {
  		//refresh driver
 		AutomatedTestingSuite.refreshDriver();
 		
-		//To Check Sort on Date/Time
-		logger.info("Verify  Sorting  on Date/Time Start");
-		driver.findElement(By.linkText("Date/Time Exam Performed")).click();
-		r.delay(5000);
-		logger.info("Verify  Sorting  on Date/Time End");
-		r.delay(5000);
-		//To Check Sort on Procedure/Test Name
-		logger.info("Verify  Sorting  on Procedure/Test Start");
-        driver.findElement(By.linkText("Procedure/Test Name")).click();
-        r.delay(5000);
-        logger.info("Verify  Sorting  on Procedure/Test End");
-        r.delay(5000);
-      //To Check Sort on Images
-		logger.info("Verify  Sorting  on images");
-        driver.findElement(By.linkText("# Images")).click();
-        r.delay(5000);
-        logger.info("Verify  Sorting  on images End");
-      //To Check Sort on PDF File Size
-		logger.info("Verify  Sorting  on PDF File Size");
-		 r.delay(5000);
-		 logger.info("Verify  Sorting  on PDF File Size End");
-		 driver.findElement(By.linkText("Est PDF Size")).click();
-		 r.delay(5000);
-        logger.info("Stated Click on PDF");
-        final WebElement elementPDF = driver.findElement(By.linkText("PDF")); //.click();   		
+		logger.info("Stated Click on PDF");
+        final WebElement elementPDF = driver.findElement(By.xpath("(//a[contains(text(),'PDF')])[3]"));//(By.linkText("PDF")); //.click();   		
    		r.delay(5000);
    		try{
    			
@@ -361,11 +276,41 @@ public class IETestcase extends AutomatedTestingSuite {
    			
    		//refresh driver
    		AutomatedTestingSuite.refreshDriver();	
+		//To Check Sort on Date/Time
+		logger.info("Verify  Sorting  on Date/Time Start");
+		driver.findElement(By.linkText("Date/Time Exam Performed")).click();
+		r.delay(5000);
+		logger.info("Verify  Sorting  on Date/Time End");
+		r.delay(5000);
+		//To Check Sort on Procedure/Test Name
+		logger.info("Verify  Sorting  on Procedure/Test Start");
+        driver.findElement(By.linkText("Procedure/Test Name")).click();
+        r.delay(5000);
+        logger.info("Verify  Sorting  on Procedure/Test End");
+        r.delay(5000);
+      //To Check Sort on Images
+		logger.info("Verify  Sorting  on images");
+        driver.findElement(By.linkText("# Images")).click();
+        r.delay(5000);
+        logger.info("Verify  Sorting  on images End");
+      //To Check Sort on PDF File Size
+		logger.info("Verify  Sorting  on PDF File Size");
+		 r.delay(5000);
+		 logger.info("Verify  Sorting  on PDF File Size End");
+		 driver.findElement(By.linkText("Est PDF Size")).click();
+		 r.delay(5000);
+        
 		
    		logger.info("Click on the SendReport Image");
    		driver.findElement(By.cssSelector("img")).click();
    		r.delay(5000);
    		
+   		logger.info("Viewing the Report Text Preview");
+		driver.findElement(By.id("textHead")).click();
+		r.delay(5000);
+		logger.info("Minimising the Report Text Preview");
+		driver.findElement(By.id("textHead")).click();
+		r.delay(5000);
    		//driver.findElement(By.id("textHead")).click();
    		/*logger.info("Viewing the Report Text Preview");
 		driver.findElement(By.id("textHead")).click();
@@ -380,20 +325,20 @@ public class IETestcase extends AutomatedTestingSuite {
 		driver.findElement(By.cssSelector("input.bbmi_button")).click();
 		r.delay(5000); 
 		//Backk to the reports list.
-		logger.info("Back to the Reports List Start");
+		/*logger.info("Back to the Reports List Start");
 		driver.findElement(By.linkText("Return to Reports List")).click();
 		logger.info("Back to the Reports List End");
-		r.delay(5000);
-		logger.info("Click on the  Preview link");
+		r.delay(5000);*/
+		/*logger.info("Click on the  Preview link");
 		driver.findElement(By.xpath("//div[@id='main']/section/div/section/table/tbody/tr[8]/td[4]/a/span")).click();
-		r.delay(7000);
+		r.delay(7000);*/
 		//Click on the Image.
-		logger.info("Click on the scanned images");
+		/*logger.info("Click on the scanned images");
 		driver.findElement(By.xpath("(//img[@alt='Radiology image thumbnail'])[6]")).click();
 		r.delay(5000);
 		logger.info("Click on the  close image to close the  scanned image");
 		driver.findElement(By.cssSelector("span.ui-icon.ui-icon-closethick")).click();
-		r.delay(5000);
+		r.delay(5000);*/
 		logger.info("Verify Member Logout is present or not");
 		assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*Member Logout[\\s\\S]*$"));
 		logger.info("Click on the Logout button");
