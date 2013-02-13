@@ -64,6 +64,8 @@ public class VeteranNegative extends AutomatedTestingSuite {
 		new Select(driver.findElement(By.id("startYear")))
 				.selectByVisibleText(getProperties().getProperty("InvalidStartYear"));
 		logger.info("::Strat Date  is ::"+getProperties().getProperty("InvaliStartMonth")+getProperties().getProperty("InvalidStratDate")+getProperties().getProperty("InvalidStartYear"));
+		new Select(driver.findElement(By.id("endYear")))
+		.selectByVisibleText(getProperties().getProperty("InvalidEndYear"));
 		new Select(driver.findElement(By.id("endMonth")))
 				.selectByVisibleText(getProperties().getProperty("InvalidEndMonth"));
 		new Select(driver.findElement(By.id("endDay")))
@@ -76,10 +78,12 @@ public class VeteranNegative extends AutomatedTestingSuite {
 		r.delay(5000);
 		logger.info("::End of Verifying the Invalid date range::");
 		driver.findElement(By.linkText("Cancel")).click();
+		r.delay(5000);
 		logger.info(":: The Cancel button was clicked::");
+		r.delay(5000);
 		driver.findElement(By.linkText("Continue")).click();
 		logger.info("::The Continue button was clicked::");
-		
+		r.delay(5000);
 		driver.findElement(By.id("date_custom")).click();
 		logger.info(":: Custom Date Range Selected::");;
 		new Select(driver.findElement(By.id("startMonth")))
@@ -91,37 +95,46 @@ public class VeteranNegative extends AutomatedTestingSuite {
 		new Select(driver.findElement(By.id("startYear")))
 				.selectByVisibleText(getProperties().getProperty("StartYear"));
 		logger.info("::Strat Date  is ::"+getProperties().getProperty("StartMonth")+getProperties().getProperty("StartDate")+getProperties().getProperty("StartYear"));
+		r.delay(5000);
 		new Select(driver.findElement(By.id("endMonth")))
 				.selectByVisibleText(getProperties().getProperty("EndMonth"));
 		new Select(driver.findElement(By.id("endDay")))
 				.selectByVisibleText(getProperties().getProperty("Endday"));
+		r.delay(5000);
 		logger.info("::End Date  is ::"+getProperties().getProperty("EndMonth")+getProperties().getProperty("Endday"));
 		driver.findElement(By.cssSelector("input.bbmi_button")).click();
 		logger.info(":: The Submit Was Clicked");
 		
 		logger.info("Click on the SendReport Image");
+		r.delay(5000);
    		driver.findElement(By.cssSelector("img")).click();
    		
    		
    		//Checking Error messages  without selecting the Provider and ack box.
 		logger.info("Click on the SendMyReport button");
+		r.delay(5000);
 		driver.findElement(By.cssSelector("input.bbmi_button")).click();
 		logger.info("Start of Verifying the error messages for provider aswell as ack box");
 		assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*Please select a provider[\\s\\S]*$"));
+		r.delay(5000);
 		assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*You must authorize the release of your information[\\s\\S]*$"));
 		logger.info("End of Verifying the error messages for provider aswell as ack box");
 		
 		//Checking error message for provider by only selecting the ack box
 		logger.info("Start of Verifying the error messages for provider only");
 		logger.info("Click on the ack box");
+		r.delay(5000);
 		driver.findElement(By.id("verify")).click();
 		logger.info("Click on the SendMyReport button");
+		r.delay(5000);
 		driver.findElement(By.cssSelector("input.bbmi_button")).click();
+		r.delay(5000);
 		assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*Please select a provider[\\s\\S]*$"));
 		logger.info("End of Verifying the error messages for provider only");
 		
 		//Checking error message for ack by only selecting the valid provider
 		logger.info("Start of Verifying the error messages for ack box only");
+		r.delay(5000);
 		driver.findElement(By.linkText("Return to List")).click();
 		r.delay(5000);
 		driver.findElement(By.cssSelector("img")).click();

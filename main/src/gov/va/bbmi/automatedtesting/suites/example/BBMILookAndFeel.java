@@ -114,7 +114,7 @@ public class BBMILookAndFeel extends AutomatedTestingSuite{
 			
 			r.delay(5000);
 			new Select(driver.findElement(By.id("startDay")))
-					.selectByVisibleText(getProperties().getProperty("StartDate"));
+					.selectByVisibleText(getProperties().getProperty("BbmiLookandfeelStartDate"));
 			r.delay(5000);
 			new Select(driver.findElement(By.id("startYear")))
 					.selectByVisibleText(getProperties().getProperty("StartYear"));
@@ -136,8 +136,9 @@ public class BBMILookAndFeel extends AutomatedTestingSuite{
 			driver.findElement(By.linkText("Date/Time Exam Performed")).click();
 			r.delay(5000);
 			logger.info("Verify  Sorting  on Date/Time End");
-			r.delay(5000);
+			
 			logger.info("Start of Verifying the next button");
+			r.delay(5000);
 			 driver.findElement(By.linkText("Next »")).click();
 			 logger.info("End of Verifythe next button");
 			 r.delay(5000);

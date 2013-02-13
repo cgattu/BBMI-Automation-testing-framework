@@ -80,8 +80,25 @@ public class VeteranP1011 extends AutomatedTestingSuite {
 		driver.findElement(By.cssSelector("input.bbmi_button")).click();
 		logger.info(":: The Submit Was Clicked");
 		r.delay(5000);
+		
+		logger.info("Click on the  Preview link");
+		driver.findElement(By.xpath("//div[@id='main']/section/div/section/table/tbody/tr[2]/td[4]/a/span")).click();
+		r.delay(7000);
+		//Click on the Image.
+		logger.info("Click on the scanned images");
+		driver.findElement(By.xpath("(//img[@alt='Radiology image thumbnail'])[6]")).click();
+		r.delay(5000);
+		logger.info("Click on the  close image to close the  scanned image");
+		driver.findElement(By.cssSelector("span.ui-icon.ui-icon-closethick")).click();
+		r.delay(5000);
+		//Back to the reports list.
+		logger.info("Back to the Reports List Start");
+		driver.findElement(By.linkText("Return to List")).click();
+		logger.info("Back to the Reports List End");
+		r.delay(5000);
 		//for()
-		driver.findElement(By.linkText("Text")).click();
+		driver.findElement(By.xpath("(//a[contains(text(),'Text')])[2]")).click();
+//		driver.findElement(By.linkText("Text")).click();
 		logger.info(":: Click on the Text to open the NotePad::");
 		r.delay(10000);
 			
@@ -94,7 +111,22 @@ public class VeteranP1011 extends AutomatedTestingSuite {
 		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
 		logger.info("::Sikuli Click on CLOSE Image::");
 		r.delay(10000);
-		
+		 logger.info("Stated Click on PDF");
+		 
+		 driver.findElement(By.xpath("(//a[contains(text(),'PDF')])[3]")).click();
+//	   	driver.findElement(By.linkText("PDF")).click();
+	   		
+	   	r.delay(5000);
+	   	s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/OK.png"); //TODO: will need to refer to this on the class path and not the actual path
+	   	logger.info("::Sikuli Click on OK Image::");
+	   	r.delay(10000);
+	   	s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
+	   	logger.info(":; Sikuli  Wait for Close image loaded::");
+	   	r.delay(10000);
+	   	s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
+	   	logger.info("::Sikuli Click on CLOSE Image::");
+	   	r.delay(10000);
+
 		//To Check Sort on Date/Time
 		logger.info("Verify  Sorting  on Date/Time Start");
 		driver.findElement(By.linkText("Date/Time Exam Performed")).click();
@@ -118,25 +150,17 @@ public class VeteranP1011 extends AutomatedTestingSuite {
 		 logger.info("Verify  Sorting  on PDF File Size End");
 		 driver.findElement(By.linkText("Est PDF Size")).click();
 		 r.delay(5000);
-        logger.info("Stated Click on PDF");
-   		driver.findElement(By.linkText("PDF")).click();
-   		
-   		r.delay(5000);
-   		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/OK.png"); //TODO: will need to refer to this on the class path and not the actual path
-		logger.info("::Sikuli Click on OK Image::");
-		r.delay(10000);
-		s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
-		logger.info(":; Sikuli  Wait for Close image loaded::");
-		r.delay(10000);
-		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
-		logger.info("::Sikuli Click on CLOSE Image::");
-		r.delay(10000);
+       
 		logger.info("Click on the SendReport Image");
-   		driver.findElement(By.cssSelector("img")).click();
+		driver.findElement(By.xpath("//div[@id='main']/section/div/section/table/tbody/tr[4]/td[7]/a/img")).click();
+//   		driver.findElement(By.cssSelector("img")).click();
    		r.delay(5000);
    		
    		//driver.findElement(By.id("textHead")).click();
    		logger.info("Viewing the Report Text Preview");
+		driver.findElement(By.id("textHead")).click();
+		r.delay(5000);
+		logger.info("Minimising the Report Text Preview");
 		driver.findElement(By.id("textHead")).click();
 		r.delay(5000);
 		logger.info("Selecting the Provider");
@@ -146,23 +170,10 @@ public class VeteranP1011 extends AutomatedTestingSuite {
 		driver.findElement(By.id("verify")).click();
 		r.delay(5000);
 		logger.info("Click on the SendMyReport button");
+		
+		
 		driver.findElement(By.cssSelector("input.bbmi_button")).click();
 		r.delay(5000); 
-		//Backk to the reports list.
-		logger.info("Back to the Reports List Start");
-		driver.findElement(By.linkText("Return to Reports List")).click();
-		logger.info("Back to the Reports List End");
-		r.delay(5000);
-		logger.info("Click on the  Preview link");
-		driver.findElement(By.xpath("//div[@id='main']/section/div/section/table/tbody/tr[8]/td[4]/a/span")).click();
-		r.delay(7000);
-		//Click on the Image.
-		logger.info("Click on the scanned images");
-		driver.findElement(By.xpath("(//img[@alt='Radiology image thumbnail'])[6]")).click();
-		r.delay(5000);
-		logger.info("Click on the  close image to close the  scanned image");
-		driver.findElement(By.cssSelector("span.ui-icon.ui-icon-closethick")).click();
-		r.delay(5000);
 		logger.info("Verify Member Logout is present or not");
 		assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*Member Logout[\\s\\S]*$"));
 		logger.info("Click on the Logout button");
