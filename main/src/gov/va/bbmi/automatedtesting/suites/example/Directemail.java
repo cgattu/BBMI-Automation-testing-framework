@@ -1,10 +1,13 @@
 package gov.va.bbmi.automatedtesting.suites.example;
 
+import java.util.concurrent.TimeUnit;
+
 import gov.va.bbmi.automatedtesting.suites.AutomatedTestingSuite;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.sikuli.script.Match;
 import org.sikuli.script.Region;
 
 public class Directemail extends AutomatedTestingSuite {
@@ -23,6 +26,7 @@ public class Directemail extends AutomatedTestingSuite {
 		logger.info("Directemail::In Start of testing SecureProvider Email::");
 		String providerURL	=	getSecureEmailLinkFromGmail();
 		logger.info("Directemail::Getting the ProviderURL from  unsecure(gmail)::  Provider URL is::"+providerURL.trim());
+		driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
 		driver.get(providerURL);
 		//driver.findElement(By.linkText("Go to the login page")).click();
 		driver.findElement(By.name("login_username")).clear();
@@ -59,7 +63,14 @@ public class Directemail extends AutomatedTestingSuite {
 		//System.out.println("pagesource is --->"+driver.getPageSource());
 		//Region region 	=	s.find("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png");
 		//System.out.println("Text is -->"+region.text());
-		s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png");
+		
+		//open pdf in email
+		//logger.info(driver.switchTo().)
+		
+		logger.info(driver.getWindowHandles().toString());
+		Match content = s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png");
+		String contentstring	= content.text();
+		logger.info(contentstring);
 		r.delay(5000);
 		//s.hover("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png"); //TODO: will need to refer to this on the class path and not the actual path
 		//r.delay(5000);
@@ -68,9 +79,15 @@ public class Directemail extends AutomatedTestingSuite {
 		logger.info("::Sikuli Click on Download link::");
 		System.out.println("Current url is "+driver.getCurrentUrl());
 		// driver.findElement(By.cssSelector("a.rowLink > span")).click();
-		//r.delay(5000);
+		r.delay(5000);
 		logger.info("::Sikuli waiting to  load Download Button ::");
-		 driver.findElement(By.linkText("Download File")).click();
+		String otherTab = driver.getWindowHandles().toArray()[1].toString();
+		logger.info(driver.getWindowHandles().toString());
+		driver.switchTo().window(otherTab);
+		logger.info("Current window handle: " + driver.getWindowHandle().toString());
+		//driver.switchTo().window(arg0);
+		logger.info(driver.getTitle());
+		 driver.findElement(By.xpath("//a[@class='regular']")).click();//By.linkText("Download File")).click();
 //		s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/DmDownload.png");
 //		driver.findElement(By.("Download")).click();
 //		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/DmDownload.png"); //TODO: will need to refer to this on the class path and not the actual path
