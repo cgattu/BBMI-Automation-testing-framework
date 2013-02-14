@@ -1,12 +1,15 @@
 package gov.va.bbmi.automatedtesting.suites.example;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import gov.va.bbmi.automatedtesting.suites.AutomatedTestingSuite;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.sikuli.script.Match;
 import org.sikuli.script.Region;
 
@@ -39,21 +42,38 @@ public class Directemail extends AutomatedTestingSuite {
 		driver.manage().window().maximize();
 		logger.info("Directemail::SubmitButton was clicked");
 		r.delay(5000);
+		
+		//switch to email list frame
+		driver.switchTo().frame(1);
+		
 		//Click on subject
-		s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/ZlarllnlnnvF.png");
+		/*s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/ZlarllnlnnvF.png");
 		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/ZlarllnlnnvF.png"); //TODO: will need to refer to this on the class path and not the actual path
-		logger.info("::Sikuli Click on Subject RadiologyReport::");
-		r.delay(5000);
+		logger.info("::Sikuli Click on Subject RadiologyReport::");*/
+		/*WebElement availableSubject = null;
+		//driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
+*/		List<WebElement> subjectList = driver.findElements(By.xpath("//tr[@class='messageRow']/td[5]/span/a"));
+		if(subjectList.isEmpty())
+			driver.quit();
+		else
+			subjectList.get(0).sendKeys(Keys.ENTER);//click();
+		logger.info("::Click on Subject RadiologyReport::");
+		r.delay(10000);
 		
 		
 		//open pdf in email
-		driver.switchTo().frame(1);
-		driver.findElement(By.cssSelector("a.rowLink > span")).click();
-		
-		//Ok button for downlaod
-		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/OK.png"); //TODO: will need to refer to this on the class path and not the actual path
-		logger.info("::Sikuli Click on OK Image::");
+		driver.findElement(By.cssSelector("a.rowLink")).sendKeys(Keys.ENTER);
+		//driver.findElement(By.xpath("//a[contains(text(),'BBDownloadServer')]")).sendKeys(Keys.ENTER);
+		//driver.findElement(By.cssSelector("a.rowLink > span")).sendKeys(Keys.ENTER);//click();
 		r.delay(10000);
+		
+		//Firefox Ok button for downlaod
+		if(!AutomatedTestingSuite.fireFoxDriverSelected)
+			s.click("C:/Direct mail sikuli images IE.sikuli/Open.png");
+		else
+			s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/OK.png"); //TODO: will need to refer to this on the class path and not the actual path
+		logger.info("::Sikuli Click on OK/open Image::");
+		r.delay(15000);
 		
 		//close pdf
 		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
@@ -62,12 +82,13 @@ public class Directemail extends AutomatedTestingSuite {
 		
 		
 		//Clickon download link on email
-		s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png");
+		/*s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png");
 		r.delay(5000);
 		//s.hover("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png"); //TODO: will need to refer to this on the class path and not the actual path
 		//r.delay(5000);
    		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png"); //TODO: will need to refer to this on the class path and not the actual path
-   		r.delay(2000);
+   		r.delay(2000);*/
+	   	driver.findElement(By.xpath("//a[contains(text(),'BBDownloadServer')]")).sendKeys(Keys.ENTER);
 		logger.info("::Sikuli Click on Download link::");
 		
 		// Click on Download File zip
@@ -80,12 +101,15 @@ public class Directemail extends AutomatedTestingSuite {
 		logger.info("Current window handle: " + driver.getWindowHandle().toString());
 		//driver.switchTo().window(arg0);
 		logger.info(driver.getTitle());
-		driver.findElement(By.xpath("//a[@class='regular']")).click();
+		driver.findElement(By.xpath("//a[@class='regular']")).sendKeys(Keys.ENTER);//click();
 		logger.info("::Cick on Download File zip ::"); //By.linkText("Download File")).click();
 		r.delay(10000);
 
 		//Firefox Ok button for downlaod
-		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/OK.png"); //TODO: will need to refer to this on the class path and not the actual path
+		if(!AutomatedTestingSuite.fireFoxDriverSelected)
+			s.click("C:/Direct mail sikuli images IE.sikuli/Open.png");
+		else
+			s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/OK.png"); 		
 		logger.info("::Sikuli Click on OK Image::");
 		r.delay(10000);
 		
@@ -153,7 +177,7 @@ public class Directemail extends AutomatedTestingSuite {
 		driver.switchTo().frame(1);
 		logger.info("::switch to email message frame::");
 		r.delay(3000);
-		driver.findElement(By.xpath("//a[@class='signoutButton']")).click();
+		driver.findElement(By.xpath("//a[@class='signoutButton']")).sendKeys(Keys.ENTER);//click();
 		logger.info("::Click on signout button::");
 		r.delay(5000);
 		

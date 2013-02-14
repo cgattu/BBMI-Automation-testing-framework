@@ -1,0 +1,1 @@
+click(Pattern("DmDownload.png").similar(0.86))
