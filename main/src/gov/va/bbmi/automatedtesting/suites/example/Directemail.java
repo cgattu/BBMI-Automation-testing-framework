@@ -81,6 +81,7 @@ public class Directemail extends AutomatedTestingSuite {
 		// driver.findElement(By.cssSelector("a.rowLink > span")).click();
 		r.delay(5000);
 		logger.info("::Sikuli waiting to  load Download Button ::");
+		String mainTab = driver.getWindowHandles().toArray()[0].toString();
 		String otherTab = driver.getWindowHandles().toArray()[1].toString();
 		logger.info(driver.getWindowHandles().toString());
 		driver.switchTo().window(otherTab);
@@ -93,9 +94,11 @@ public class Directemail extends AutomatedTestingSuite {
 //		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/DmDownload.png"); //TODO: will need to refer to this on the class path and not the actual path
 		
 		r.delay(10000);
+		//Ok button for downlaod
 		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/OK.png"); //TODO: will need to refer to this on the class path and not the actual path
 		logger.info("::Sikuli Click on OK Image::");
 		r.delay(10000);
+		/*//Close button for download
 		
 		s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
 		logger.info(":; Sikuli  Wait for Close image loaded::");
@@ -103,7 +106,67 @@ public class Directemail extends AutomatedTestingSuite {
 		
 		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
 		logger.info("::Sikuli Click on CLOSE Image::");
+		r.delay(10000);*/
+		
+		s.wait("C:/Direct mail sikuli images.sikuli/IHEES2FXEEEE.png");
+		logger.info(":; Sikuli  Wait for mhv prototype folder loaded::");
+		r.delay(5000);
+		s.doubleClick("C:/Direct mail sikuli images.sikuli/IHEES2FXEEEE.png");
+		logger.info("::Sikuli Click on mhv prototype folder Image::");
+		r.delay(5000);
+		
+		s.wait("C:/Direct mail sikuli images.sikuli/mhv_protctyp.png");
+		logger.info("::Sikuli wait for mhv prototype notepad Image::");
 		r.delay(10000);
+		s.doubleClick("C:/Direct mail sikuli images.sikuli/mhv_protctyp.png");
+		logger.info("::Sikuli Click on mhv prototype notepad Image::");
+		r.delay(10000);
+		
+		s.wait("C:/Direct mail sikuli images.sikuli/E.png");
+		logger.info("::Sikuli wait for CLOSE Image::");
+		r.delay(2000);
+		s.click("C:/Direct mail sikuli images.sikuli/E.png");
+		logger.info("::Sikuli Click on CLOSE Image::");
+		r.delay(2000);
+		
+		s.wait("C:/Direct mail sikuli images.sikuli/IITIBQES.png");
+		logger.info("::Sikuli wait on images folder Image::");
+		r.delay(5000);
+		s.doubleClick("C:/Direct mail sikuli images.sikuli/IITIBQES.png");
+		logger.info("::Sikuli Click on images folder Image::");
+		r.delay(5000);
+		
+		s.wait("C:/Direct mail sikuli images.sikuli/ljseries1.png");
+		logger.info("::Sikuli wait on series1 folder Image::");
+		r.delay(5000);
+		s.doubleClick("C:/Direct mail sikuli images.sikuli/ljseries1.png");
+		logger.info("::Sikuli Click on series1 folder Image::");
+		r.delay(5000);
+		
+		s.wait("C:/Direct mail sikuli images.sikuli/Lurmvaimage6.png");
+		logger.info("::Sikuli wait for dicom image Image::");
+		r.delay(10000);
+		s.doubleClick("C:/Direct mail sikuli images.sikuli/Lurmvaimage6.png");
+		logger.info("::Sikuli Click on dicom Image::");
+		r.delay(10000);
+		
+		s.wait("C:/Direct mail sikuli images.sikuli/1360855464111.png");
+		logger.info("::Sikuli wait on dicom CLOSE Image::");
+		r.delay(5000);
+		s.click("C:/Direct mail sikuli images.sikuli/1360855464111.png");
+		logger.info("::Sikuli Click on dicom CLOSE Image::");
+		r.delay(5000);
+		
+		s.wait("C:/Direct mail sikuli images.sikuli/1360854843903.png");
+		logger.info("::Sikuli Click on zip CLOSE Image::");
+		r.delay(5000);
+		s.click("C:/Direct mail sikuli images.sikuli/1360854843903.png");
+		logger.info("::Sikuli Click on zip CLOSE Image::");
+		r.delay(5000);
+		
+		// switch to main tab
+		driver.switchTo().window(mainTab);
+		
 	//	driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
 		// Warning: verifyTextPresent may require manual changes
 		/*try {
