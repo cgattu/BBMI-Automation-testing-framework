@@ -1,9 +1,12 @@
 package gov.va.bbmi.automatedtesting.suites.example;
 
+import java.util.concurrent.TimeUnit;
+
 import gov.va.bbmi.automatedtesting.suites.AutomatedTestingSuite;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.sikuli.script.Region;
 
@@ -23,6 +26,7 @@ public class DirectemailErrorMsg extends AutomatedTestingSuite {
 		logger.info("Directemail::In Start of testing SecureProvider Email::");
 		String providerURL	=	getSecureEmailLinkFromGmail();
 		logger.info("Directemail::Getting the ProviderURL from  unsecure(gmail)::  Provider URL is::"+providerURL.trim());
+		driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
 		driver.get(providerURL);
 		//driver.findElement(By.linkText("Go to the login page")).click();
 		driver.findElement(By.name("login_username")).clear();
@@ -35,67 +39,46 @@ public class DirectemailErrorMsg extends AutomatedTestingSuite {
 		driver.manage().window().maximize();
 		logger.info("Directemail::SubmitButton was clicked");
 		r.delay(5000);
+		
+		//switch to email list frame
+		driver.switchTo().frame(1);
+		
+		//Click on subject 		
 		s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/RadiologyRep.png");
 		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/RadiologyRep.png"); //TODO: will need to refer to this on the class path and not the actual path
 		logger.info("::Sikuli Click on Subject RadiologyReport::");
 		r.delay(5000);
-		/* for (int second = 0;; second++) {
-		    	//if (second >= 60) fail("timeout");
-		    	try { if (isElementPresent(By.cssSelector("a.rowLink > span"))) break; } catch (Exception e) {System.out.println("in first exception block"); e.printStackTrace(); }
-		    	//Thread.sleep(1000);
-		    }
-
-		    for (int second = 0;; second++) {
-		    	//if (second >= 60) fail("timeout");
-		    	try { if ("Download".equals(driver.findElement(By.cssSelector("a.rowLink > span")).getText())) break; } catch (Exception e) {System.out.println("in second exception block"); e.printStackTrace();}
-		    	//Thread.sleep(1000);
-		    }*/
-
-		  // try{ driver.findElement(By.cssSelector("a.rowLink > span")).click();}catch(Exception e){System.out.println("In third exception block");e.printStackTrace();}
-		//r.delay(20000);
 		
-		//String content	=	driver.findElement(By.id("messageBody")).getText();
-		//System.out.println("content is ---"+ content);
+		// click on download link in email
 		System.out.println("pagesource is --->"+driver.getPageSource());
 		Region region 	=	s.find("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png");
-		//System.out.println("Text is -->"+region.text());
-//		System.out.println(s.hover("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png")); //TODO: will need to refer to this on the class path and not the actual path
-   		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png"); //TODO: will need to refer to this on the class path and not the actual path
-		logger.info("::Sikuli Click on the link to open the erro screen::");
-		
-//		Region region 	=	s.find("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png");
-		//System.out.println("Text is -->"+region.text());
-//		System.out.println(s.hover("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png")); //TODO: will need to refer to this on the class path and not the actual path
+		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png"); //TODO: will need to refer to this on the class path and not the actual path
+		logger.info("::Sikuli Click on the link to open the erro screen::");		
+			
+	
+		//Test error message
 		logger.info(":silkuli testchecking Error message");
    		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/ErrorTherewa.png"); //TODO: will need to refer to this on the class path and not the actual path
 		logger.info("::Sikuli Checking ErrorMsg complete::");
-		// driver.findElement(By.cssSelector("a.rowLink > span")).click();
-		//r.delay(5000);
-		//logger.info("::Sikuli waiting to  load Download Button ::");
-		// driver.findElement(By.linkText("Download File")).click();
-//		s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/DmDownload.png");
-//		driver.findElement(By.("Download")).click();
-//		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/DmDownload.png"); //TODO: will need to refer to this on the class path and not the actual path
 		
-		//r.delay(10000);
-		//s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/OK.png"); //TODO: will need to refer to this on the class path and not the actual path
-		//logger.info("::Sikuli Click on OK Image::");
-		//r.delay(10000);
+		// signout
+		if(!AutomatedTestingSuite.fireFoxDriverSelected){			
+			logger.info("::close download tab::");
+			r.delay(3000);
+			s.click("C:/Direct mail sikuli images.sikuli/1360854843903.png");
+			logger.info("::Click on download file window close button::");
+			r.delay(3000);
+		}
+		else{
+			// switch to main tab and logout			
+			driver.switchTo().frame(1);
+			logger.info("::switch to email message frame::");
+		}			
+		r.delay(3000);
+		driver.findElement(By.xpath("//a[@class='signoutButton']")).sendKeys(Keys.ENTER);//click();
+		logger.info("::Click on signout button::");
+		r.delay(5000);
 		
-		//s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
-		////logger.info(":; Sikuli  Wait for Close image loaded::");
-		r.delay(10000);
-		
-	//	s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
-	//	logger.info("::Sikuli Click on CLOSE Image::");
-		r.delay(10000);
-	//	driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
-		// Warning: verifyTextPresent may require manual changes
-		/*try {
-			assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*Error\r\nThere was an error retrieving your download\r\n\r\nThere was an error retrieving your file for download\\.[\\s\\S]*$"));
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}*/
 	}
 	
 }
