@@ -41,6 +41,7 @@ public abstract class AutomatedTestingSuite {
 	protected static Screen s;
 	protected static Robot r;
 	protected static Properties props;
+	protected static boolean fireFoxDriverSelected;
 	@Rule
 	public ResultsLogWatchMan resultLogWatchMan = ResultsLogWatchMan.getInstance();
 	
@@ -63,7 +64,7 @@ public abstract class AutomatedTestingSuite {
 		// Add to the desired logger
 		logger = LoggerFactory.getLogger("bbmi.testing.results");
 		
-		boolean fireFoxDriverSelected = Boolean.parseBoolean(getProperties().getProperty("FireFoxDriver"));
+		fireFoxDriverSelected = Boolean.parseBoolean(getProperties().getProperty("FireFoxDriver"));
 		if (fireFoxDriverSelected)
 			setupFirefoxDriver();
 		else

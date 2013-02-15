@@ -78,7 +78,7 @@ public class Directemail extends AutomatedTestingSuite {
 		//close pdf
 		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
 	   	logger.info("::Sikuli Click on CLOSE Image::");
-	   	r.delay(5000);
+	   	r.delay(8000);
 		
 		
 		//Clickon download link on email
@@ -88,6 +88,7 @@ public class Directemail extends AutomatedTestingSuite {
 		//r.delay(5000);
    		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/hccp15814721.png"); //TODO: will need to refer to this on the class path and not the actual path
    		r.delay(2000);*/
+	   	driver.switchTo().frame(1);
 	   	driver.findElement(By.xpath("//a[contains(text(),'BBDownloadServer')]")).sendKeys(Keys.ENTER);
 		logger.info("::Sikuli Click on Download link::");
 		
@@ -97,13 +98,20 @@ public class Directemail extends AutomatedTestingSuite {
 		String mainTab = driver.getWindowHandles().toArray()[0].toString();
 		String otherTab = driver.getWindowHandles().toArray()[1].toString();
 		logger.info(driver.getWindowHandles().toString());
-		driver.switchTo().window(otherTab);
+		if(!AutomatedTestingSuite.fireFoxDriverSelected){
+			s.click("C:/Sikuli direct mail sign out.sikuli/DownloadHle.png");
+		}
+		else{
+			driver.switchTo().window(otherTab);
+			driver.findElement(By.xpath("//a[@class='regular']")).sendKeys(Keys.ENTER);//click();
+			logger.info("::Cick on Download File zip ::"); //By.linkText("Download File")).click();
+			r.delay(10000);
+		}
+		
 		logger.info("Current window handle: " + driver.getWindowHandle().toString());
 		//driver.switchTo().window(arg0);
 		logger.info(driver.getTitle());
-		driver.findElement(By.xpath("//a[@class='regular']")).sendKeys(Keys.ENTER);//click();
-		logger.info("::Cick on Download File zip ::"); //By.linkText("Download File")).click();
-		r.delay(10000);
+		
 
 		//Firefox Ok button for downlaod
 		if(!AutomatedTestingSuite.fireFoxDriverSelected)
@@ -171,15 +179,26 @@ public class Directemail extends AutomatedTestingSuite {
 		logger.info("::Sikuli Click on zip CLOSE Image::");
 		r.delay(5000);
 		
-		// switch to main tab and logout		
-		driver.switchTo().window(mainTab);
-		logger.info("::switch to main tab::");
-		driver.switchTo().frame(1);
-		logger.info("::switch to email message frame::");
+		
+		if(!AutomatedTestingSuite.fireFoxDriverSelected){			
+			logger.info("::close download tab::");
+			s.click("C:/Direct mail sikuli images.sikuli/1360854843903.png");
+			logger.info("::Click on download file window close button::");
+			r.delay(3000);
+		}
+		else{
+			// switch to main tab and logout		
+			driver.switchTo().window(mainTab);
+			logger.info("::switch to main tab::");
+			driver.switchTo().frame(1);
+			logger.info("::switch to email message frame::");
+		}	
+		
 		r.delay(3000);
 		driver.findElement(By.xpath("//a[@class='signoutButton']")).sendKeys(Keys.ENTER);//click();
 		logger.info("::Click on signout button::");
 		r.delay(5000);
+		
 		
 	
 	}
