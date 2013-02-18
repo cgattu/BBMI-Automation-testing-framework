@@ -27,8 +27,6 @@ public class BBMILookAndFeel extends AutomatedTestingSuite{
 
 	@Test
 	public void verifyForLoginTable() throws Exception {
-		Document document = null;
-		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();		
 		
 	
 		
@@ -38,11 +36,21 @@ public class BBMILookAndFeel extends AutomatedTestingSuite{
 		
 		logger.info("::getting the URL from the properties file :: The URL is ::"+getProperties().getProperty("URL"));
 		r.delay(5000);
-		logger.info("Verify the Member Login Text Present or not ");
-		assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*Member Login[\\s\\S]*$"));
+		try{
+			logger.info("Test -- Verify the Member Login Text Present or not ");
+			assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*Member Login[\\s\\S]*$"));
+		}catch(Error e) {
+			logger.info(e.toString());
+		     fail();
+		}
 		r.delay(5000);
-		logger.info("Verify the UserID text Present or not");
-		assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*User ID:[\\s\\S]*$"));
+		try{
+			logger.info("Test -- Verify the UserID text Present or not");
+			assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*User ID:[\\s\\S]*$"));
+		}catch(Error e) {
+			logger.info(e.toString());
+		     fail();
+		}
 		r.delay(5000);
 		driver.findElement(By.name("loginId")).clear();
 		driver.findElement(By.name("loginId")).sendKeys(getProperties().getProperty("userID"));
@@ -50,11 +58,12 @@ public class BBMILookAndFeel extends AutomatedTestingSuite{
 		r.delay(5000);
 		driver.findElement(By.cssSelector("input.mhv_button")).click();
 		logger.info("::The login button was clicked::");
-		r.delay(5000);
+		r.delay(7000);
 		driver.findElement(By.cssSelector("strong > a")).click();
 		r.delay(5000);
 		try{
-		assertTrue("Checking the CSS for the Continue button",driver.findElement(By.className("bbmi_button")).getText().matches("^[\\s\\S]*Continue[\\s\\S]*$"));
+			logger.info("Test -- Checking the CSS for the Continue button");
+			assertTrue("Checking the CSS for the Continue button",driver.findElement(By.className("bbmi_button")).getText().matches("^[\\s\\S]*Continue[\\s\\S]*$"));
 		}catch (Error e) {
 			logger.info(e.toString());
 		     fail();
@@ -63,55 +72,34 @@ public class BBMILookAndFeel extends AutomatedTestingSuite{
 		logger.info("::The Continue button was clicked::");
 		r.delay(5000);
 		try {
+			logger.info("Test -- BBMI - My HealtheVet Prototype - Download My Selected Data");
 			assertEquals("Result: ","BBMI - My HealtheVet Prototype - Download My Selected Data", driver.getTitle());
 		} catch (Error e) {
 			logger.info(e.toString());
 		     fail();
 		}
 		try{
+			logger.info("Test -- Checking the va_banner is present or not");
 			assertTrue("Checking the va_banner is present or not::",isElementPresent(By.id("va_banner")));
 		}catch (Error e) {
 			 logger.info(e.toString());
 		     fail();
 		}
-		 /*try {
-		      assertTrue("Checking the United States Department of Veterans Affairs in the body :: ",driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*United States Department of Veterans Affairs[\\s\\S]*$"));
-		    } catch (Error e) {
-		     logger.info(e.toString());
-		     fail();
-		    }*/
-		    
-	    /*try {
-	      assertEquals("Result:","United States Department of Veterans Affairs", driver.findElement(By.id("va_banner")).getText());
-	    } catch (Error e) {
-		     logger.info(e.toString());java
-		     fail();
-		    }*/
-	    /*try {
-	    	logger.info(driver.getCurrentUrl() + "\n\n" + driver.getPageSource());
-	    	document = builder.parse(new InputSource(new StringReader(driver.getPageSource())));
-	    	//Evaluate XPath against Document itself
-	        XPath xPath = XPathFactory.newInstance().newXPath();
-	        NodeList nodes = (NodeList)xPath.evaluate("//div[@id='va_banner']/h2",
-	                document.getDocumentElement(), XPathConstants.NODESET);
-	        for (int i = 0; i < nodes.getLength(); ++i) {
-	            Element e = (Element) nodes.item(i);
-	            logger.info("banner text from builder: " + e.getTextContent());
-	        }
-	    	//logger.info("banner text from builder: " + document.);
-	    	logger.info("banner text: " + driver.findElement(By.xpath("//div[@id='va_banner']/h2")).getAttribute("value"));
-	      assertEquals("Result:","United States Department of Veterans Affairs", driver.findElement(By.cssSelector("#va_banner > h2.ir")).getText());
+		 
+	    try {
+	    	
+	    	logger.info("Test -- Checking the va_banner text says 'United States Department of Veterans Affairs' ");
+	      assertEquals("Result:","United States Department of Veterans Affairs", driver.findElement(By.xpath("//div[@id='va_banner']/h2")).getAttribute("innerHTML"));
 	    } catch (Error e) {
 		     logger.info(e.toString());
 		     fail();
-		    }*/
-	    // Warning: assertTextPresent may require manual changes
+		    }
+	  
 	   
 	    
-	    //assertEquals("United States Department of Veterans Affairs", driver.findElement(By.id("va_banner")).getText());
 	    
-	   // assertEquals("VA Prototype Radiology Reports and Medical Imaging", driver.findElement(By.cssSelector("h2.disclaimer")).getText());
 	    try {
+	    	logger.info("Test -- Checking the VA Prototype Radiology Reports and Medical Imaging disclaimer ");
 	    	assertTrue(isElementPresent(By.cssSelector("h2.disclaimer")));
 	      assertEquals("Result:","VA Prototype Radiology Reports and Medical Imaging", driver.findElement(By.cssSelector("h2.disclaimer")).getText());
 	    } catch (Error e) {
@@ -119,7 +107,9 @@ public class BBMILookAndFeel extends AutomatedTestingSuite{
 		     fail();
 	    }
 	    try {
-	    assertEquals("Result:","My HealtheVet", driver.findElement(By.cssSelector("#mhv_banner > h2.ir")).getText());
+	    	logger.info("Test -- Checking the My HealtheVet banner text ");
+	    	assertTrue(isElementPresent(By.cssSelector("#mhv_banner > h2.ir")));
+	    	assertEquals("Result:","My HealtheVet", driver.findElement(By.cssSelector("#mhv_banner > h2.ir")).getText());
 	    }
 	    catch (Error e) {
 	    	logger.info(e.toString());
@@ -128,7 +118,8 @@ public class BBMILookAndFeel extends AutomatedTestingSuite{
 	    
 	    // Warning: assertTextPresent may require manual changes
 	    try{
-	    	assertTrue(isElementPresent(By.cssSelector("#mhv_banner > h2.ir")));
+	    	logger.info("Test -- Checking VA Home is Present or not ");
+	    	//
 	    	assertTrue("Checking VA Home is Present or not",driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*VA Home[\\s\\S]*$"));
 	    	assertEquals("VA Home", driver.findElement(By.linkText("VA Home")).getText());
 	    }catch (Error e) {
