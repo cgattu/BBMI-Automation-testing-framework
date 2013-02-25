@@ -4,10 +4,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
+
+import java.awt.event.KeyEvent;
+
 import gov.va.bbmi.automatedtesting.suites.AutomatedTestingSuite;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.sikuli.script.FindFailed;
 
@@ -97,35 +102,15 @@ public class VeteranP1011 extends AutomatedTestingSuite {
 		logger.info("Back to the Reports List End");
 		r.delay(5000);
 		//for()
-		driver.findElement(By.xpath("(//a[contains(text(),'Text')])[2]")).click();
-//		driver.findElement(By.linkText("Text")).click();
-		logger.info(":: Click on the Text to open the NotePad::");
-		r.delay(10000);
-			
-		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/OK.png"); //TODO: will need to refer to this on the class path and not the actual path
-		logger.info("::Sikuli Click on OK Image::");
-		r.delay(10000);
-		s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
-		logger.info(":; Sikuli  Wait for Close image loaded::");
-		r.delay(10000);
-		s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
-		logger.info("::Sikuli Click on CLOSE Image::");
-		r.delay(10000);
-		 logger.info("Stated Click on PDF");
-		 
-		 driver.findElement(By.xpath("(//a[contains(text(),'PDF')])[3]")).click();
+		logger.info(":: Click on the Text icon to open the NotePad::");
+		fileDownload(driver.findElement(By.xpath("(//a[contains(text(),'Text')])[2]")));
+//		driver.findElement(By.linkText("Text")).click();		
+		
+		 logger.info(":: Click on the PDF icon to open the PDF::");
+		
+		// PDF click open and close
+		fileDownload(driver.findElement(By.xpath("(//a[contains(text(),'PDF')])[3]")));//.click();
 //	   	driver.findElement(By.linkText("PDF")).click();
-	   		
-	   	r.delay(5000);
-	   	s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/OK.png"); //TODO: will need to refer to this on the class path and not the actual path
-	   	logger.info("::Sikuli Click on OK Image::");
-	   	r.delay(10000);
-	   	s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
-	   	logger.info(":; Sikuli  Wait for Close image loaded::");
-	   	r.delay(10000);
-	   	s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
-	   	logger.info("::Sikuli Click on CLOSE Image::");
-	   	r.delay(10000);
 
 		//To Check Sort on Date/Time
 		logger.info("Verify  Sorting  on Date/Time Start");
@@ -180,14 +165,65 @@ public class VeteranP1011 extends AutomatedTestingSuite {
 		r.delay(5000);
 		driver.findElement(By.cssSelector("input.mhv_button")).click();
 		logger.info("logout button was clicked");
-   		//driver.findElement(By.id("textHead")).click();
-   		//driver.findElement(By.linkText("Download PDF Report")).click();
-   		//s.click("C:/BBMI Automated Testing/main/src/Img1/OK.png");
-       // r.delay(10000);
-       // s.wait("C:/BBMI Automated Testing/main/src/Img1/E.png");
-        //r.delay(10000);
-       // s.click("C:/BBMI Automated Testing/main/src/Img1/E.png");
-		//driver.close(); //this is now handled in @AfterTest
+   		
         logger.info(":: End of testForFileOpening::");
+	}
+	
+	public void fileDownload(WebElement downloadElement){
+		try{
+			// simulate click function
+			downloadElement.sendKeys(Keys.ENTER);
+			
+			if(!AutomatedTestingSuite.fireFoxDriverSelected){
+				r.delay(7000);
+				logger.info("clicked!");
+					
+				r.keyPress(KeyEvent.VK_ALT);
+		        r.keyPress(KeyEvent.VK_N);
+		        r.keyRelease(KeyEvent.VK_ALT);
+		        r.keyRelease(KeyEvent.VK_N);
+		        logger.info("Notification Bar Selected...");
+		        
+		        r.delay(5000);
+		        
+		        //Select Save button
+		        r.keyPress(KeyEvent.VK_O);
+		        r.keyRelease(KeyEvent.VK_O);
+		        logger.info("File open...");
+
+		        r.delay(7000);
+		        
+		      //close notepad..
+		        r.keyPress(KeyEvent.VK_ALT);
+		        r.keyPress(KeyEvent.VK_F4);
+		        r.keyRelease(KeyEvent.VK_ALT);
+		        r.keyRelease(KeyEvent.VK_F4);
+		        logger.info("closed pdf...");
+		        
+		        r.delay(5000);
+		        
+		        //Close notification Bar
+		        r.keyPress(KeyEvent.VK_ESCAPE);
+		        r.keyRelease(KeyEvent.VK_ESCAPE);
+		        logger.info("Notification Bar Closed...");
+		        
+		        r.delay(5000);
+			}
+			else{
+				r.delay(5000);
+			   	s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/OK.png"); //TODO: will need to refer to this on the class path and not the actual path
+			   	logger.info("::Sikuli Click on OK Image::");
+			   	r.delay(10000);
+			   	s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
+			   	logger.info(":; Sikuli  Wait for Close image loaded::");
+			   	r.delay(10000);
+			   	s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/E.png");
+			   	logger.info("::Sikuli Click on CLOSE Image::");
+			   	r.delay(10000);			
+			}		
+		}catch(Exception e){
+			logger.info(e.getLocalizedMessage());
+		}
+		
 	}
 }
