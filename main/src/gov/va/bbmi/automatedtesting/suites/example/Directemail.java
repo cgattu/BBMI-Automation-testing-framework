@@ -117,7 +117,7 @@ public class Directemail extends AutomatedTestingSuite {
 		if(!AutomatedTestingSuite.fireFoxDriverSelected)
 			s.click("C:/Direct mail sikuli images IE.sikuli/Open.png");
 		else
-			s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/OK.png"); 		
+			s.click("C:/workspace/BBMI Automated Testing/main/src/Img1/OK.png"); 		
 		logger.info("::Sikuli Click on OK Image::");
 		r.delay(10000);
 		

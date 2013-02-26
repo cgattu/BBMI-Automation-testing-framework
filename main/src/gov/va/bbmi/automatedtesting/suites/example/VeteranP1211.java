@@ -21,7 +21,7 @@ public class VeteranP1211 extends AutomatedTestingSuite {
 		logger.info("**********Start open application************");
 		driver.get(getProperties().getProperty("URL"));
 		logger.info("::getting the URL from the properties file :: The URL is ::"+getProperties().getProperty("URL"));
-		r.delay(5000);
+		r.delay(7000);
 		driver.manage().window().maximize();
 		driver.findElement(By.name("loginId")).clear();
 		driver.findElement(By.name("loginId")).sendKeys(getProperties().getProperty("userID_1211"));
@@ -61,7 +61,9 @@ public class VeteranP1211 extends AutomatedTestingSuite {
 		logger.info(":: The Submit Was Clicked");
 		r.delay(5000);
 		logger.info("Verify Member Logout is present or not");
-		assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*Member Logout[\\s\\S]*$"));
+		//logger.info(driver.findElement(By.xpath("//h3")).getText());
+		assertTrue(driver.findElement(By.xpath("//h3[contains(text(),'Member Logout')]")).getText().matches("^[\\s\\S]*Member Logout[\\s\\S]*$"));
+		//assertTrue(driver.findElement(By.cssSelector("BODY")).getText().matches("^[\\s\\S]*Member Logout[\\s\\S]*$"));
 		logger.info("Click on the Logout button");
 		r.delay(5000);
 		driver.findElement(By.cssSelector("input.mhv_button")).click();

@@ -12,6 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -50,23 +51,15 @@ import org.sikuli.script.Screen;
 			}
 		//	r.delay(10000);
 			r.delay(10000);
-			s.wait("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/Nmiticatiun0.png");
-			logger.info(":; Sikuli  Wait for Subject is loaded::");
-			r.delay(10000);
-			s.click("C:/BBMI-Automation-testing-framework-master/BBMI-Automation-testing-framework-master/main/src/Img1/Nmiticatiun0.png");
+			
+			//click on gmail subject 
+			driver.findElement(By.xpath("//td//span[contains(text(),'Notification of new Direct email message')]/../../../../..")).click();//sendKeys(Keys.ENTER); ///span[contains(text(),'Notification of new Direct email message')]
+			
+			
+			
+			r.delay(15000);
 			logger.info("::Sikuliopen the gmail subject::");
-			//driver.findElement(By.className("T-I J-J5-Ji nu T-I-ax7 L3")).click();//T-I J-J5-Ji nu T-I-ax7 L3
-		//	driver.findElement(By.xpath("//div[@id=':ro']/div/div/div/div/div/div[4]/div/div/div")).click();
-		//	//driver.findElement(By.linkText("exact:https://158.147.211.124/JavaBridge/mail/src/login.php")).click();
-	///		r.delay(5000);
-			// ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp | _blank | 30000]]
-		///	driver.findElement(By.name("login_username")).clear();
-			//driver.findElement(By.name("login_username")).sendKeys("providerthree@Florida-HIE.net");
-		//	driver.findElement(By.name("secretkey")).clear();
-			////driver.findElement(By.name("secretkey")).sendKeys("testuser");
-			//driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
-			// ERROR: Caught exception [ERROR: Unsupported command [selectFrame | right | ]]
-			//driver.findElement(By.cssSelector("span.messageSubject")).click();
+			
 		}
 
 		@After
